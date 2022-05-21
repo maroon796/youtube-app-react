@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
 
-const Search = () => {
+const Search = ({ onFormSubmit }) => {
   const [searchWord, setSearchWord] = useState('');
 
-  const onFormSubmit = (e) => {
+  const onInputChange = (e) => {
+    setSearchWord(e.target.value);
+  };
+
+  const onSubmit = (e) => {
     e.preventDefault();
 
-    //make sure calling callback from parent
+    onFormSubmit(searchWord);
   };
 
   return (
     <div className="search-bar ui segment">
-      <form className="ui form" onSubmit={onFormSubmit}>
+      <form className="ui form" onSubmit={onSubmit}>
         <div className="field">
           <label>Search Video</label>
-          <input type="text" value={searchWord} onChange={(e) => setSearchWord(e.target.value)} />
+          <input type="text" value={searchWord} onChange={onInputChange} />
         </div>
       </form>
     </div>
